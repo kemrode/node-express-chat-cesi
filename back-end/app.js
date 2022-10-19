@@ -7,7 +7,7 @@ module.exports = function (app, server) {
     app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-        res.setHeader('Access-Control-Allow-Methods', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
         next();
     });
 
@@ -15,7 +15,7 @@ module.exports = function (app, server) {
 
     const io = require('socket.io')(server, {
         cors: {
-            origin: "http://127.0.0.1:5000",
+            origin: "http://127.0.0.1:5500",
             methods: ["GET", "POST"]
         }
     })
@@ -24,7 +24,7 @@ module.exports = function (app, server) {
 
     app.use(function (req, res, next) { req.io = io; next(); });
 
-    app.get('/test', (req, res, next) => {
-        res.status(200).json({ hello: 'world' })
-    })
+    // app.get('/test', (req, res, next) => {
+    //     res.status(200).json({ hello: 'world' })
+    // })
 }

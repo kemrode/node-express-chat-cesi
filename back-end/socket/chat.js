@@ -10,8 +10,10 @@ module.exports = function (io) {
       io.emit('notification', { type: 'removed_user', data: socket.id });
     });
 
-    socket.on('...', (msg) => {
-
-    });
+    // Listener sur le canal général
+    socket.on('general', (msg) => {
+      console.log("j'écoute : ", msg);
+      io.emit('general', msg);
+    })
   })
 }
